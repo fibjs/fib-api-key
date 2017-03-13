@@ -13,6 +13,7 @@ function send_error(r, code, msg) {
 }
 
 function api_key(conn, opts) {
+    opts = opts || {};
     var _back = new kv(conn, opts);
 
     util.extend(this, {
@@ -34,7 +35,7 @@ function api_key(conn, opts) {
         clear_cache: function() {
             _back.clear_cache();
         },
-        middleware: function(r) {
+        filter: function(r) {
             var id = r.firstHeader('X-' + opts.app_name + '-Id');
             var key = r.firstHeader('X-' + opts.app_name + '-Key');
 
