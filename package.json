@@ -1,0 +1,21 @@
+{
+    "name": "fib-api-key",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "ci": "fibjs test.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "keywords": [
+        "restful",
+        "api",
+        "key",
+        "auth",
+        "fibjs"
+    ],
+    "dependencies": {
+        "fib-kv": "^1.0.1"
+    }
+}
