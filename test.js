@@ -5,7 +5,6 @@ var api_key = require('./');
 var db = require('db');
 
 var http = require('http');
-var mq = require('mq');
 
 describe("api-key", () => {
     var conn;
@@ -34,12 +33,12 @@ describe("api-key", () => {
     });
 
     it('server', function() {
-        var svr = new http.Server(8888, new mq.Chain([
+        var svr = new http.Server(8888, [
             ak.filter,
             function(r) {
                 called = true;
             }
-        ]));
+        ]);
 
         svr.asyncRun();
     });
@@ -81,12 +80,12 @@ describe("api-key", () => {
             app_name: 'test'
         });
 
-        var svr = new http.Server(8889, new mq.Chain([
+        var svr = new http.Server(8889, [
             ak.filter,
             function(r) {
                 called = true;
             }
-        ]));
+        ]);
 
         svr.asyncRun();
 
