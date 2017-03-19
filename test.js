@@ -29,7 +29,7 @@ describe("api-key", () => {
             app_name: 'test'
         });
 
-        ak.setup();
+        ak.store.setup();
     });
 
     it('server', function() {
@@ -52,7 +52,7 @@ describe("api-key", () => {
     });
 
     it('auth passed', function() {
-        ak.set('test-id', 'test-key');
+        ak.store.set('test-id', 'test-key');
         called = false;
         var r = http.get('http://127.0.0.1:8888/test', {
             'X-test-Id': 'test-id',
