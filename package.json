@@ -1,6 +1,6 @@
 {
     "name": "fib-api-key",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -16,6 +16,6 @@
         "fibjs"
     ],
     "dependencies": {
-        "fib-kv": "^1.0.1"
+        "fib-kv": "^1.1.0"
     }
 }

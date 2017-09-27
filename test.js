@@ -32,10 +32,10 @@ describe("api-key", () => {
         ak.store.setup();
     });
 
-    it('server', function() {
+    it('server', function () {
         var svr = new http.Server(8888, [
             ak.filter,
-            function(r) {
+            function (r) {
                 called = true;
             }
         ]);
@@ -43,37 +43,37 @@ describe("api-key", () => {
         svr.asyncRun();
     });
 
-    it('no key', function() {
+    it('no key', function () {
         called = false;
         var r = http.get('http://127.0.0.1:8888/test');
-        assert.equal(r.status, 401);
+        assert.equal(r.statusCode, 401);
         assert.equal(r.firstHeader('Content-Type'), 'application/json');
         assert.isFalse(called);
     });
 
-    it('auth passed', function() {
+    it('auth passed', function () {
         ak.store.set('test-id', 'test-key');
         called = false;
         var r = http.get('http://127.0.0.1:8888/test', {
             'X-test-Id': 'test-id',
             'X-test-Key': 'test-key',
         });
-        assert.equal(r.status, 200);
+        assert.equal(r.statusCode, 200);
         assert.isTrue(called);
     });
 
-    it('auth not passed', function() {
+    it('auth not passed', function () {
         called = false;
         var r = http.get('http://127.0.0.1:8888/test', {
             'X-test-Id': 'test-id',
             'X-test-Key': 'test-key1',
         });
-        assert.equal(r.status, 401);
+        assert.equal(r.statusCode, 401);
         assert.equal(r.firstHeader('Content-Type'), 'application/json');
         assert.isFalse(called);
     });
 
-    it('json config', function() {
+    it('json config', function () {
         ak = new api_key({
             m_id: 'm_key'
         }, {
@@ -82,7 +82,7 @@ describe("api-key", () => {
 
         var svr = new http.Server(8889, [
             ak.filter,
-            function(r) {
+            function (r) {
                 called = true;
             }
         ]);
@@ -94,7 +94,7 @@ describe("api-key", () => {
             'X-test-Id': 'm_id',
             'X-test-Key': 'm_key',
         });
-        assert.equal(r.status, 200);
+        assert.equal(r.statusCode, 200);
         assert.isTrue(called);
     });
 });

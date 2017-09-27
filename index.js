@@ -2,13 +2,12 @@ var util = require('util');
 var kv = require('fib-kv');
 
 function send_error(r, code, msg) {
-    r.status = 401;
-    r.setHeader('Content-Type', 'application/json');
-    r.write(JSON.stringify({
+    r.statusCode = 401;
+    r.json({
         "error": "Unauthorized",
         "message": msg,
         "status": code
-    }));
+    });
     r.end();
 }
 
