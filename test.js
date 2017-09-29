@@ -55,8 +55,10 @@ describe("api-key", () => {
         ak.store.set('test-id', 'test-key');
         called = false;
         var r = http.get('http://127.0.0.1:8888/test', {
-            'X-test-Id': 'test-id',
-            'X-test-Key': 'test-key',
+            headers: {
+                'X-test-Id': 'test-id',
+                'X-test-Key': 'test-key',
+            }
         });
         assert.equal(r.statusCode, 200);
         assert.isTrue(called);
@@ -65,8 +67,10 @@ describe("api-key", () => {
     it('auth not passed', function () {
         called = false;
         var r = http.get('http://127.0.0.1:8888/test', {
-            'X-test-Id': 'test-id',
-            'X-test-Key': 'test-key1',
+            headers: {
+                'X-test-Id': 'test-id',
+                'X-test-Key': 'test-key1',
+            }
         });
         assert.equal(r.statusCode, 401);
         assert.equal(r.firstHeader('Content-Type'), 'application/json');
@@ -91,8 +95,10 @@ describe("api-key", () => {
 
         called = false;
         var r = http.get('http://127.0.0.1:8889/test', {
-            'X-test-Id': 'm_id',
-            'X-test-Key': 'm_key',
+            headers: {
+                'X-test-Id': 'm_id',
+                'X-test-Key': 'm_key'
+            }
         });
         assert.equal(r.statusCode, 200);
         assert.isTrue(called);
